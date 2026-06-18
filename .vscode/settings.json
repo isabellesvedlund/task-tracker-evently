@@ -1,0 +1,18 @@
+{
+  "editor.tokenColorCustomizations": {
+    "comments": "#FFA500",
+    "textMateRules": [
+      {
+        "scope": [
+          "comment",
+          "comment.block",
+          "comment.line",
+          "comment.documentation"
+        ],
+        "settings": {
+          "foreground": "#FFA500"
+        }
+      }
+    ]
+  }
+}
