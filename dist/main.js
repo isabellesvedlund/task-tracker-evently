@@ -1,5 +1,5 @@
 console.log("TaskTracker");
-function taskTracker() {
+function showHeader() {
     console.log(`
 ==================================
 
@@ -8,7 +8,7 @@ function taskTracker() {
 ==================================
 `);
 }
-taskTracker();
+showHeader();
 const tasks = [
     "Lära mig TypeScript",
     "Träna",
@@ -22,4 +22,9 @@ for (let i = 0; i < tasks.length; i++) {
 }
 console.log(`Antal uppgifter: ${tasks.length}`);
 export {};
+//function showTasks(): {
+//   tasks.forEach(task => {
+//   console.log(task);
+// })}
+//}
 //# sourceMappingURL=main.js.map
