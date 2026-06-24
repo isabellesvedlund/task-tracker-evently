@@ -70,7 +70,7 @@ function showCompletedTasks() {
         }
     });
 }
-// Visa aavklarade tasks från arrayen
+// Visa oavklarade tasks från arrayen
 function showPendingTasks() {
     console.log("Ej avklarade tasks:");
     tasks.forEach((task) => {

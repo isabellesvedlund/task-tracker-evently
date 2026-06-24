@@ -92,7 +92,7 @@ function showCompletedTasks(): void {
     }
   });
 }
-// Visa aavklarade tasks från arrayen
+// Visa oavklarade tasks från arrayen
 function showPendingTasks(): void {
   console.log("Ej avklarade tasks:");
 
