@@ -48,4 +48,4 @@ addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
 
-console.log(tasks);
+showTasks();

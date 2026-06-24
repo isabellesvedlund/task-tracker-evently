@@ -26,6 +26,6 @@ function showTasks() {
 addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
-console.log(tasks);
+showTasks();
 export {};
 //# sourceMappingURL=task-tracker-dag6.js.map
