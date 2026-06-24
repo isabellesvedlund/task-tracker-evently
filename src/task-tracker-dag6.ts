@@ -32,7 +32,18 @@ function addTask(name: string, priority: "low" | "medium" | "high"): void {
   tasks.push(newTask);
 }
 
-//Lägger till och skriver ut tasks
+function showTasks(): void {
+  console.log("Alla tasks:");
+
+  tasks.forEach((task) => {
+    console.log(`Namn: ${task.name}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Prioritet: ${task.priority}`);
+    console.log("---------------");
+  });
+}
+
+//--------TESTER---------------
 addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
