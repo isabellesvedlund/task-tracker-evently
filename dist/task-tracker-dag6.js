@@ -16,14 +16,19 @@ function addTask(name, priority) {
     tasks.push(newTask);
 }
 //-----------------------------
+// Skriver ut en task
+function printTask(task) {
+    console.log(`Namn: ${task.name}`);
+    console.log(`Status: ${task.status}`);
+    console.log(`Prioritet: ${task.priority}`);
+    console.log("---------------");
+}
+//-----------------------------
 // Visa alla tasks i ordning med sina egenskaper
 function showTasks() {
     console.log("Alla tasks:");
     tasks.forEach((task) => {
-        console.log(`Namn: ${task.name}`);
-        console.log(`Status: ${task.status}`);
-        console.log(`Prioritet: ${task.priority}`);
-        console.log("---------------");
+        printTask(task);
     });
 }
 //-----------------------------
@@ -32,10 +37,7 @@ function showPendingTasks() {
     console.log("Pending tasks:");
     tasks.forEach((task) => {
         if (task.status === "pending") {
-            console.log(`Namn: ${task.name}`);
-            console.log(`Status: ${task.status}`);
-            console.log(`Prioritet: ${task.priority}`);
-            console.log("---------------");
+            printTask(task);
         }
     });
 }
@@ -45,10 +47,7 @@ function showCompletedTasks() {
     console.log("Completed tasks:");
     tasks.forEach((task) => {
         if (task.status === "completed") {
-            console.log(`Namn: ${task.name}`);
-            console.log(`Status: ${task.status}`);
-            console.log(`Prioritet: ${task.priority}`);
-            console.log("---------------");
+            printTask(task);
         }
     });
 }
@@ -58,12 +57,20 @@ function showTasksByPriority(priority) {
     console.log(`Tasks med prioritet: ${priority}`);
     tasks.forEach((task) => {
         if (task.priority === priority) {
-            console.log(`Namn: ${task.name}`);
-            console.log(`Status: ${task.status}`);
-            console.log(`Prioritet: ${task.priority}`);
-            console.log("---------------");
+            printTask(task);
         }
     });
+}
+//-----------------------------
+// Markera en task som completed
+function completeTask(taskName) {
+    const foundTask = tasks.find((task) => task.name === taskName);
+    if (foundTask) {
+        foundTask.status = "completed";
+    }
+    else {
+        console.log("Tasken hittades inte.");
+    }
 }
 //-----------------------------
 //--------TESTER---------------

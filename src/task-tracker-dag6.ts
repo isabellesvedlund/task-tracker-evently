@@ -36,15 +36,21 @@ function addTask(name: string, priority: "low" | "medium" | "high"): void {
 }
 
 //-----------------------------
+// Skriver ut en task
+function printTask(task: Task): void {
+  console.log(`Namn: ${task.name}`);
+  console.log(`Status: ${task.status}`);
+  console.log(`Prioritet: ${task.priority}`);
+  console.log("---------------");
+}
+
+//-----------------------------
 // Visa alla tasks i ordning med sina egenskaper
 function showTasks(): void {
   console.log("Alla tasks:");
 
   tasks.forEach((task) => {
-    console.log(`Namn: ${task.name}`);
-    console.log(`Status: ${task.status}`);
-    console.log(`Prioritet: ${task.priority}`);
-    console.log("---------------");
+    printTask(task);
   });
 }
 
@@ -55,10 +61,7 @@ function showPendingTasks(): void {
 
   tasks.forEach((task) => {
     if (task.status === "pending") {
-      console.log(`Namn: ${task.name}`);
-      console.log(`Status: ${task.status}`);
-      console.log(`Prioritet: ${task.priority}`);
-      console.log("---------------");
+      printTask(task);
     }
   });
 }
@@ -70,10 +73,7 @@ function showCompletedTasks(): void {
 
   tasks.forEach((task) => {
     if (task.status === "completed") {
-      console.log(`Namn: ${task.name}`);
-      console.log(`Status: ${task.status}`);
-      console.log(`Prioritet: ${task.priority}`);
-      console.log("---------------");
+      printTask(task);
     }
   });
 }
@@ -85,12 +85,21 @@ function showTasksByPriority(priority: "low" | "medium" | "high"): void {
 
   tasks.forEach((task) => {
     if (task.priority === priority) {
-      console.log(`Namn: ${task.name}`);
-      console.log(`Status: ${task.status}`);
-      console.log(`Prioritet: ${task.priority}`);
-      console.log("---------------");
+      printTask(task);
     }
   });
+}
+
+//-----------------------------
+// Markera en task som completed
+function completeTask(taskName: string): void {
+  const foundTask = tasks.find((task) => task.name === taskName);
+
+  if (foundTask) {
+    foundTask.status = "completed";
+  } else {
+    console.log("Tasken hittades inte.");
+  }
 }
 
 //-----------------------------
