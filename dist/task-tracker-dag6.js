@@ -97,5 +97,7 @@ addTask("Diska", "low");
 showPendingTasks();
 showCompletedTasks();
 showTasksByPriority("high");
+completeTask("Handla");
+showTasks();
 export {};
 //# sourceMappingURL=task-tracker-dag6.js.map

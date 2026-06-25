@@ -128,3 +128,6 @@ addTask("Diska", "low");
 showPendingTasks();
 showCompletedTasks();
 showTasksByPriority("high");
+
+completeTask("Handla");
+showTasks();
