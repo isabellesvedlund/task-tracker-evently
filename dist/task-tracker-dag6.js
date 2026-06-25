@@ -103,6 +103,4 @@ toggleTaskStatus("Handla");
 console.log("Efter toggleTaskStatus:");
 showTasks();
 export {};
-//Före är dem som inlagda, andra steget blir handla completed, och tredje blir den pending igen.
-// 25:e 16:15
 //# sourceMappingURL=task-tracker-dag6.js.map

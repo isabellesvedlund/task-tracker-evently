@@ -10,11 +10,16 @@
 // }
 
 //-----------------------------
-//Definierar typen Task
+//Definierar typer
+
+type TaskStatus = "pending" | "completed";
+
+type TaskPriority = "low" | "medium" | "high";
+
 type Task = {
   name: string;
-  status: "pending" | "completed";
-  priority: "low" | "medium" | "high";
+  status: TaskStatus;
+  priority: TaskPriority;
   description?: string;
   notes?: string;
 };
@@ -25,7 +30,7 @@ const tasks: Task[] = [];
 
 //-----------------------------
 //Lägga till en task
-function addTask(name: string, priority: "low" | "medium" | "high"): void {
+function addTask(name: string, priority: TaskPriority): void {
   const newTask: Task = {
     name: name,
     status: "pending",
@@ -80,7 +85,7 @@ function showCompletedTasks(): void {
 
 //-----------------------------
 // Visa tasks med vald prioritet
-function showTasksByPriority(priority: "low" | "medium" | "high"): void {
+function showTasksByPriority(priority: TaskPriority): void {
   console.log(`Tasks med prioritet: ${priority}`);
 
   tasks.forEach((task) => {
@@ -137,5 +142,3 @@ toggleTaskStatus("Handla");
 
 console.log("Efter toggleTaskStatus:");
 showTasks();
-//Före är dem som inlagda, andra steget blir handla completed, och tredje blir den pending igen.
-// 25:e 16:15
