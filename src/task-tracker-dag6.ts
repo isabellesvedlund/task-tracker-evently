@@ -125,9 +125,15 @@ addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
 
-showPendingTasks();
-showCompletedTasks();
-showTasksByPriority("high");
+console.log("Före:");
+showTasks();
 
 completeTask("Handla");
+
+console.log("Efter completeTask:");
+showTasks();
+
+toggleTaskStatus("Handla");
+
+console.log("Efter toggleTaskStatus:");
 showTasks();
