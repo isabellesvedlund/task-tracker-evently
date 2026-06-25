@@ -2,11 +2,17 @@
 // function showHeader(): void {
 //   console.log(`
 // ==================================
-//-----------------------------
-//Array med objekten task
+//---------------------------------
+//--------ARRAY MED OBJEKT TASK----
+//---------------------------------
 const tasks = [];
 //-----------------------------
-//Lägga till en task
+//-- HÄMTAR ELEMENT FRÅN HTML--
+const title = document.querySelector("#title");
+title.textContent = "Mina Tasks";
+const app = document.querySelector("#app");
+//-----------------------------
+//--------ADD TASK-------------
 function addTask(name, priority) {
     const newTask = {
         name: name,
@@ -16,15 +22,15 @@ function addTask(name, priority) {
     tasks.push(newTask);
 }
 //-----------------------------
-// Skriver ut en task
+//------- PRINT TASK-----------
 function printTask(task) {
     console.log(`Namn: ${task.name}`);
     console.log(`Status: ${task.status}`);
     console.log(`Prioritet: ${task.priority}`);
     console.log("---------------");
 }
-//-----------------------------
-// Visa alla tasks i ordning med sina egenskaper
+//-----------------------------------
+//---SHOW TASKS WITH PROPERTIES------
 function showTasks() {
     console.log("Alla tasks:");
     tasks.forEach((task) => {
@@ -32,7 +38,7 @@ function showTasks() {
     });
 }
 //-----------------------------
-// Visa endast pending tasks
+//--PENDING TASKS--------------
 function showPendingTasks() {
     console.log("Pending tasks:");
     tasks.forEach((task) => {
@@ -42,7 +48,7 @@ function showPendingTasks() {
     });
 }
 //-----------------------------
-// Visa endast completed tasks
+//----COMPLETED TASKS----------
 function showCompletedTasks() {
     console.log("Completed tasks:");
     tasks.forEach((task) => {
@@ -52,7 +58,7 @@ function showCompletedTasks() {
     });
 }
 //-----------------------------
-// Visa tasks med vald prioritet
+//----SHOW SPECIFIC PRIORITY---
 function showTasksByPriority(priority) {
     console.log(`Tasks med prioritet: ${priority}`);
     tasks.forEach((task) => {
@@ -62,7 +68,7 @@ function showTasksByPriority(priority) {
     });
 }
 //-----------------------------
-// Markera en task som completed
+//----MARK COMPLETED-----------
 function completeTask(taskName) {
     const foundTask = tasks.find((task) => task.name === taskName);
     if (foundTask) {
@@ -72,8 +78,8 @@ function completeTask(taskName) {
         console.log("Tasken hittades inte.");
     }
 }
-//-----------------------------
-// Växla mellan pending och completed
+//----------------------------------
+//------TOGGLE PENDING-COMPLETED----
 function toggleTaskStatus(taskName) {
     const foundTask = tasks.find((task) => task.name === taskName);
     if (foundTask) {
@@ -89,18 +95,41 @@ function toggleTaskStatus(taskName) {
     }
 }
 //-----------------------------
-//--------TESTER---------------
+//---RENDER TASKS FOR WEBSITE--
+function renderTasks() {
+    if (app) {
+        app.innerHTML = "";
+    }
+    for (const task of tasks) {
+        const card = document.createElement("div");
+        card.classList.add("task");
+        if (task.priority === "high") {
+            card.classList.add("high-priority");
+        }
+        const title = document.createElement("h3");
+        title.textContent = task.name;
+        const status = document.createElement("p");
+        status.textContent = `Status: ${task.status}`;
+        const priority = document.createElement("p");
+        priority.textContent = `Prioritet: ${task.priority}`;
+        const completeButton = document.createElement("button");
+        completeButton.classList.add("btn");
+        completeButton.textContent = "Complete";
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("btn");
+        deleteButton.textContent = "Delete";
+        card.append(title, status, priority, completeButton, deleteButton);
+        app?.append(card);
+    }
+}
+//-----------------------------
+//------------TESTS------------
 //-----------------------------
 addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
-console.log("Före:");
-showTasks();
 completeTask("Handla");
-console.log("Efter completeTask:");
-showTasks();
 toggleTaskStatus("Handla");
-console.log("Efter toggleTaskStatus:");
-showTasks();
+renderTasks();
 export {};
 //# sourceMappingURL=task-tracker-dag6.js.map

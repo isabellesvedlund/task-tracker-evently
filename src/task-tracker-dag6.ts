@@ -9,8 +9,9 @@
 // `);
 // }
 
-//-----------------------------
-//Definierar typer
+//----------------------------------
+//---------- DEFINIERAR TYPER-------
+//----------------------------------
 
 type TaskStatus = "pending" | "completed";
 
@@ -24,12 +25,20 @@ type Task = {
   notes?: string;
 };
 
-//-----------------------------
-//Array med objekten task
+//---------------------------------
+//--------ARRAY MED OBJEKT TASK----
+//---------------------------------
 const tasks: Task[] = [];
 
 //-----------------------------
-//Lägga till en task
+//-- HÄMTAR ELEMENT FRÅN HTML--
+const title = document.querySelector("#title") as HTMLHeadingElement;
+title.textContent = "Mina Tasks";
+
+const app = document.querySelector("#app");
+
+//-----------------------------
+//--------ADD TASK-------------
 function addTask(name: string, priority: TaskPriority): void {
   const newTask: Task = {
     name: name,
@@ -41,7 +50,7 @@ function addTask(name: string, priority: TaskPriority): void {
 }
 
 //-----------------------------
-// Skriver ut en task
+//------- PRINT TASK-----------
 function printTask(task: Task): void {
   console.log(`Namn: ${task.name}`);
   console.log(`Status: ${task.status}`);
@@ -49,8 +58,8 @@ function printTask(task: Task): void {
   console.log("---------------");
 }
 
-//-----------------------------
-// Visa alla tasks i ordning med sina egenskaper
+//-----------------------------------
+//---SHOW TASKS WITH PROPERTIES------
 function showTasks(): void {
   console.log("Alla tasks:");
 
@@ -60,7 +69,7 @@ function showTasks(): void {
 }
 
 //-----------------------------
-// Visa endast pending tasks
+//--PENDING TASKS--------------
 function showPendingTasks(): void {
   console.log("Pending tasks:");
 
@@ -72,7 +81,7 @@ function showPendingTasks(): void {
 }
 
 //-----------------------------
-// Visa endast completed tasks
+//----COMPLETED TASKS----------
 function showCompletedTasks(): void {
   console.log("Completed tasks:");
 
@@ -84,7 +93,7 @@ function showCompletedTasks(): void {
 }
 
 //-----------------------------
-// Visa tasks med vald prioritet
+//----SHOW SPECIFIC PRIORITY---
 function showTasksByPriority(priority: TaskPriority): void {
   console.log(`Tasks med prioritet: ${priority}`);
 
@@ -96,7 +105,7 @@ function showTasksByPriority(priority: TaskPriority): void {
 }
 
 //-----------------------------
-// Markera en task som completed
+//----MARK COMPLETED-----------
 function completeTask(taskName: string): void {
   const foundTask = tasks.find((task) => task.name === taskName);
 
@@ -107,8 +116,8 @@ function completeTask(taskName: string): void {
   }
 }
 
-//-----------------------------
-// Växla mellan pending och completed
+//----------------------------------
+//------TOGGLE PENDING-COMPLETED----
 function toggleTaskStatus(taskName: string): void {
   const foundTask = tasks.find((task) => task.name === taskName);
 
@@ -124,21 +133,52 @@ function toggleTaskStatus(taskName: string): void {
 }
 
 //-----------------------------
-//--------TESTER---------------
+//---RENDER TASKS FOR WEBSITE--
+function renderTasks(): void {
+  if (app) {
+    app.innerHTML = "";
+  }
+
+  for (const task of tasks) {
+    const card = document.createElement("div");
+    card.classList.add("task");
+
+    if (task.priority === "high") {
+      card.classList.add("high-priority");
+    }
+
+    const title = document.createElement("h3");
+    title.textContent = task.name;
+
+    const status = document.createElement("p");
+    status.textContent = `Status: ${task.status}`;
+
+    const priority = document.createElement("p");
+    priority.textContent = `Prioritet: ${task.priority}`;
+
+    const completeButton = document.createElement("button");
+    completeButton.classList.add("btn");
+    completeButton.textContent = "Complete";
+
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("btn");
+    deleteButton.textContent = "Delete";
+
+    card.append(title, status, priority, completeButton, deleteButton);
+
+    app?.append(card);
+  }
+}
+
+//-----------------------------
+//------------TESTS------------
 //-----------------------------
 addTask("Lära mig TypeScript", "high");
 addTask("Handla", "medium");
 addTask("Diska", "low");
 
-console.log("Före:");
-showTasks();
-
 completeTask("Handla");
-
-console.log("Efter completeTask:");
-showTasks();
 
 toggleTaskStatus("Handla");
 
-console.log("Efter toggleTaskStatus:");
-showTasks();
+renderTasks();
