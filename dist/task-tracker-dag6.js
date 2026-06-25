@@ -73,6 +73,22 @@ function completeTask(taskName) {
     }
 }
 //-----------------------------
+// Växla mellan pending och completed
+function toggleTaskStatus(taskName) {
+    const foundTask = tasks.find((task) => task.name === taskName);
+    if (foundTask) {
+        if (foundTask.status === "pending") {
+            foundTask.status = "completed";
+        }
+        else {
+            foundTask.status = "pending";
+        }
+    }
+    else {
+        console.log("Tasken hittades inte.");
+    }
+}
+//-----------------------------
 //--------TESTER---------------
 //-----------------------------
 addTask("Lära mig TypeScript", "high");
