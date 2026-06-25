@@ -133,6 +133,38 @@ function toggleTaskStatus(taskName: string): void {
 }
 
 //-----------------------------
+//---RENDER ONE TASK CARD------
+function renderTask(task: Task): HTMLDivElement {
+  const card = document.createElement("div");
+  card.classList.add("task");
+
+  if (task.priority === "high") {
+    card.classList.add("high-priority");
+  }
+
+  const title = document.createElement("h3");
+  title.textContent = task.name;
+
+  const status = document.createElement("p");
+  status.textContent = `Status: ${task.status}`;
+
+  const priority = document.createElement("p");
+  priority.textContent = `Prioritet: ${task.priority}`;
+
+  const completeButton = document.createElement("button");
+  completeButton.classList.add("btn");
+  completeButton.textContent = "Complete";
+
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("btn");
+  deleteButton.textContent = "Delete";
+
+  card.append(title, status, priority, completeButton, deleteButton);
+
+  return card;
+}
+
+//-----------------------------
 //---RENDER TASKS FOR WEBSITE--
 function renderTasks(): void {
   if (app) {
@@ -140,31 +172,7 @@ function renderTasks(): void {
   }
 
   for (const task of tasks) {
-    const card = document.createElement("div");
-    card.classList.add("task");
-
-    if (task.priority === "high") {
-      card.classList.add("high-priority");
-    }
-
-    const title = document.createElement("h3");
-    title.textContent = task.name;
-
-    const status = document.createElement("p");
-    status.textContent = `Status: ${task.status}`;
-
-    const priority = document.createElement("p");
-    priority.textContent = `Prioritet: ${task.priority}`;
-
-    const completeButton = document.createElement("button");
-    completeButton.classList.add("btn");
-    completeButton.textContent = "Complete";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("btn");
-    deleteButton.textContent = "Delete";
-
-    card.append(title, status, priority, completeButton, deleteButton);
+    const card = renderTask(task);
 
     app?.append(card);
   }
