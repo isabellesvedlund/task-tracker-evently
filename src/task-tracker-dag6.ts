@@ -137,3 +137,5 @@ toggleTaskStatus("Handla");
 
 console.log("Efter toggleTaskStatus:");
 showTasks();
+//Före är dem som inlagda, andra steget blir handla completed, och tredje blir den pending igen.
+// 25:e 16:15
