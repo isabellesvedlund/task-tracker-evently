@@ -29,7 +29,7 @@ type Task = {
 //---------------------------------
 //--------ARRAY MED OBJEKT TASK----
 //---------------------------------
-const tasks: Task[] = [];
+let tasks: Task[] = [];
 let nextId = 1;
 
 //-----------------------------
@@ -174,6 +174,14 @@ function toggleTask(id: number): void {
   renderTasks();
 }
 
+//----------------------------------
+//------DELETE TASK BY ID-----------
+function deleteTask(id: number): void {
+  tasks = tasks.filter((task) => task.id !== id);
+
+  renderTasks();
+}
+
 //-----------------------------
 //---RENDER ONE TASK CARD------
 function renderTask(task: Task): HTMLDivElement {
@@ -202,7 +210,9 @@ function renderTask(task: Task): HTMLDivElement {
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("btn");
   deleteButton.textContent = "Delete";
-
+  deleteButton.addEventListener("click", () => {
+    deleteTask(task.id);
+  });
   card.append(title, status, priority, completeButton, deleteButton);
 
   return card;
