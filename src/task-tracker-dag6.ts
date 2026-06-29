@@ -45,19 +45,19 @@ const priorityInput = document.querySelector(
   "#priority-input",
 ) as HTMLSelectElement;
 
-const addButton = document.querySelector("#add-button") as HTMLButtonElement;
+const taskForm = document.querySelector("#task-form") as HTMLFormElement;
 
-addButton.addEventListener("click", () => {
-  const taskName = taskInput.value.trim();
+const errorMessage = document.querySelector(
+  "#error-message",
+) as HTMLParagraphElement;
 
-  if (taskName === "") {
-    console.log("Task name is required.");
-    return;
-  }
-  const priority = priorityInput.value as TaskPriority;
+function handleSubmit(event: SubmitEvent): void {
+  event.preventDefault();
 
-  addTask(taskName, priority);
-});
+  console.log("Formuläret skickades.");
+}
+
+taskForm.addEventListener("submit", handleSubmit);
 
 //-----------------------------
 //--------ADD TASK-------------

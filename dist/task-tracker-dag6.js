@@ -14,16 +14,13 @@ title.textContent = "Mina Tasks";
 const app = document.querySelector("#app");
 const taskInput = document.querySelector("#task-input");
 const priorityInput = document.querySelector("#priority-input");
-const addButton = document.querySelector("#add-button");
-addButton.addEventListener("click", () => {
-    const taskName = taskInput.value.trim();
-    if (taskName === "") {
-        console.log("Task name is required.");
-        return;
-    }
-    const priority = priorityInput.value;
-    addTask(taskName, priority);
-});
+const taskForm = document.querySelector("#task-form");
+const errorMessage = document.querySelector("#error-message");
+function handleSubmit(event) {
+    event.preventDefault();
+    console.log("Formuläret skickades.");
+}
+taskForm.addEventListener("submit", handleSubmit);
 //-----------------------------
 //--------ADD TASK-------------
 function addTask(name, priority) {
