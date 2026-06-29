@@ -43,6 +43,9 @@ const taskInput = document.querySelector("#task-input") as HTMLInputElement;
 const descriptionInput = document.querySelector(
   "#description-input",
 ) as HTMLTextAreaElement;
+const descriptionCount = document.querySelector(
+  "#description-count",
+) as HTMLParagraphElement;
 const priorityInput = document.querySelector(
   "#priority-input",
 ) as HTMLSelectElement;
@@ -89,11 +92,21 @@ function handleSubmit(event: SubmitEvent): void {
 
   const priority = priorityInput.value as TaskPriority;
 
-  addTask(taskName, priority);
+  const description = descriptionInput.value.trim();
+  if (description.length > 100) {
+    errorMessage.textContent = "Description must be max 100 characters.";
+    return;
+  }
+
+  addTask(taskName, priority, description);
 
   taskForm.reset();
+  descriptionCount.textContent = "0 / 100";
 }
 taskForm.addEventListener("submit", handleSubmit);
+descriptionInput.addEventListener("input", () => {
+  descriptionCount.textContent = `${descriptionInput.value.length} / 100`;
+});
 
 //-----------------------------
 //--------ADD TASK-------------
@@ -104,9 +117,9 @@ function addTask(
 ): void {
   const newTask: Task = {
     id: nextId,
-    name: name,
+    name,
     status: "pending",
-    priority: priority,
+    priority,
   };
 
   if (description) {
@@ -164,6 +177,11 @@ function renderTask(task: Task): HTMLDivElement {
   const priority = document.createElement("p");
   priority.textContent = `Prioritet: ${task.priority}`;
 
+  const description = document.createElement("p");
+  if (task.description) {
+    description.textContent = `Beskrivning: ${task.description}`;
+  }
+
   const completeButton = document.createElement("button");
   completeButton.classList.add("btn");
   completeButton.textContent = task.status === "pending" ? "Complete" : "Undo";
@@ -176,7 +194,13 @@ function renderTask(task: Task): HTMLDivElement {
   deleteButton.addEventListener("click", () => {
     deleteTask(task.id);
   });
-  card.append(title, status, priority, completeButton, deleteButton);
+  card.append(title, status, priority);
+
+  if (task.description) {
+    card.append(description);
+  }
+
+  card.append(completeButton, deleteButton);
 
   return card;
 }

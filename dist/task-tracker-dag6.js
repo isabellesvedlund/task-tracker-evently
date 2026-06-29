@@ -14,6 +14,7 @@ title.textContent = "Mina Tasks";
 const app = document.querySelector("#app");
 const taskInput = document.querySelector("#task-input");
 const descriptionInput = document.querySelector("#description-input");
+const descriptionCount = document.querySelector("#description-count");
 const priorityInput = document.querySelector("#priority-input");
 const taskForm = document.querySelector("#task-form");
 const errorMessage = document.querySelector("#error-message");
@@ -43,18 +44,27 @@ function handleSubmit(event) {
     }
     errorMessage.textContent = "";
     const priority = priorityInput.value;
-    addTask(taskName, priority);
+    const description = descriptionInput.value.trim();
+    if (description.length > 100) {
+        errorMessage.textContent = "Description must be max 100 characters.";
+        return;
+    }
+    addTask(taskName, priority, description);
     taskForm.reset();
+    descriptionCount.textContent = "0 / 100";
 }
 taskForm.addEventListener("submit", handleSubmit);
+descriptionInput.addEventListener("input", () => {
+    descriptionCount.textContent = `${descriptionInput.value.length} / 100`;
+});
 //-----------------------------
 //--------ADD TASK-------------
 function addTask(name, priority, description) {
     const newTask = {
         id: nextId,
-        name: name,
+        name,
         status: "pending",
-        priority: priority,
+        priority,
     };
     if (description) {
         newTask.description = description;
@@ -101,6 +111,10 @@ function renderTask(task) {
     status.textContent = `Status: ${task.status}`;
     const priority = document.createElement("p");
     priority.textContent = `Prioritet: ${task.priority}`;
+    const description = document.createElement("p");
+    if (task.description) {
+        description.textContent = `Beskrivning: ${task.description}`;
+    }
     const completeButton = document.createElement("button");
     completeButton.classList.add("btn");
     completeButton.textContent = task.status === "pending" ? "Complete" : "Undo";
@@ -113,7 +127,11 @@ function renderTask(task) {
     deleteButton.addEventListener("click", () => {
         deleteTask(task.id);
     });
-    card.append(title, status, priority, completeButton, deleteButton);
+    card.append(title, status, priority);
+    if (task.description) {
+        card.append(description);
+    }
+    card.append(completeButton, deleteButton);
     return card;
 }
 //-----------------------------
