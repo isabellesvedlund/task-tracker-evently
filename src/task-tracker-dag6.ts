@@ -18,6 +18,7 @@ type TaskStatus = "pending" | "completed";
 type TaskPriority = "low" | "medium" | "high";
 
 type Task = {
+  id: number;
   name: string;
   status: TaskStatus;
   priority: TaskPriority;
@@ -29,6 +30,7 @@ type Task = {
 //--------ARRAY MED OBJEKT TASK----
 //---------------------------------
 const tasks: Task[] = [];
+let nextId = 1;
 
 //-----------------------------
 //-- HÄMTAR ELEMENT FRÅN HTML--
@@ -61,12 +63,14 @@ addButton.addEventListener("click", () => {
 //--------ADD TASK-------------
 function addTask(name: string, priority: TaskPriority): void {
   const newTask: Task = {
+    id: nextId,
     name: name,
     status: "pending",
     priority: priority,
   };
 
   tasks.push(newTask);
+  nextId++;
   renderTasks();
   taskInput.value = "";
 }

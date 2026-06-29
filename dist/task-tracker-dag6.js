@@ -6,6 +6,7 @@
 //--------ARRAY MED OBJEKT TASK----
 //---------------------------------
 const tasks = [];
+let nextId = 1;
 //-----------------------------
 //-- HÄMTAR ELEMENT FRÅN HTML--
 const title = document.querySelector("#title");
@@ -27,11 +28,13 @@ addButton.addEventListener("click", () => {
 //--------ADD TASK-------------
 function addTask(name, priority) {
     const newTask = {
+        id: nextId,
         name: name,
         status: "pending",
         priority: priority,
     };
     tasks.push(newTask);
+    nextId++;
     renderTasks();
     taskInput.value = "";
 }
