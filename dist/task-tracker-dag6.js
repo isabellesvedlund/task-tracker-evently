@@ -5,7 +5,7 @@
 //---------------------------------
 //--------ARRAY MED OBJEKT TASK----
 //---------------------------------
-const tasks = [];
+let tasks = [];
 let nextId = 1;
 //-----------------------------
 //-- HÄMTAR ELEMENT FRÅN HTML--
@@ -126,6 +126,12 @@ function toggleTask(id) {
     }
     renderTasks();
 }
+//----------------------------------
+//------DELETE TASK BY ID-----------
+function deleteTask(id) {
+    tasks = tasks.filter((task) => task.id !== id);
+    renderTasks();
+}
 //-----------------------------
 //---RENDER ONE TASK CARD------
 function renderTask(task) {
@@ -149,6 +155,9 @@ function renderTask(task) {
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("btn");
     deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+        deleteTask(task.id);
+    });
     card.append(title, status, priority, completeButton, deleteButton);
     return card;
 }
