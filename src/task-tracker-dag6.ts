@@ -51,25 +51,25 @@ const errorMessage = document.querySelector(
   "#error-message",
 ) as HTMLParagraphElement;
 
+//-----------------------------
+//--------HANDLE SUBMIT--------
 function handleSubmit(event: SubmitEvent): void {
   event.preventDefault();
 
-  function handleSubmit(event: SubmitEvent): void {
-    event.preventDefault();
+  const taskName = taskInput.value.trim();
 
-    const taskName = taskInput.value.trim();
-
-    if (taskName === "") {
-      errorMessage.textContent = "Task name is required.";
-      return;
-    }
-    errorMessage.textContent = "";
-    const priority = priorityInput.value as TaskPriority;
-
-    addTask(taskName, priority);
-    taskForm.reset();
-    taskForm.addEventListener("submit", handleSubmit);
+  if (taskName === "") {
+    errorMessage.textContent = "Task name is required.";
+    return;
   }
+
+  errorMessage.textContent = "";
+
+  const priority = priorityInput.value as TaskPriority;
+
+  addTask(taskName, priority);
+
+  taskForm.reset();
 }
 
 taskForm.addEventListener("submit", handleSubmit);

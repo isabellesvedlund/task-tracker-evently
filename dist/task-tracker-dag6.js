@@ -16,21 +16,19 @@ const taskInput = document.querySelector("#task-input");
 const priorityInput = document.querySelector("#priority-input");
 const taskForm = document.querySelector("#task-form");
 const errorMessage = document.querySelector("#error-message");
+//-----------------------------
+//--------HANDLE SUBMIT--------
 function handleSubmit(event) {
     event.preventDefault();
-    function handleSubmit(event) {
-        event.preventDefault();
-        const taskName = taskInput.value.trim();
-        if (taskName === "") {
-            errorMessage.textContent = "Task name is required.";
-            return;
-        }
-        errorMessage.textContent = "";
-        const priority = priorityInput.value;
-        addTask(taskName, priority);
-        taskForm.reset();
-        taskForm.addEventListener("submit", handleSubmit);
+    const taskName = taskInput.value.trim();
+    if (taskName === "") {
+        errorMessage.textContent = "Task name is required.";
+        return;
     }
+    errorMessage.textContent = "";
+    const priority = priorityInput.value;
+    addTask(taskName, priority);
+    taskForm.reset();
 }
 taskForm.addEventListener("submit", handleSubmit);
 //-----------------------------
