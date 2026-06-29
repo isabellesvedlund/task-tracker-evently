@@ -52,14 +52,34 @@ const errorMessage = document.querySelector(
 ) as HTMLParagraphElement;
 
 //-----------------------------
+//--------VALIDATE TASK--------
+function validateTaskName(taskName: string): string {
+  if (taskName === "") {
+    return "Task name is required.";
+  }
+
+  if (taskName.length < 3) {
+    return "Task name must be at least 3 characters.";
+  }
+
+  if (taskName.length > 40) {
+    return "Task name must be max 40 characters.";
+  }
+
+  return "";
+}
+
+//-----------------------------
 //--------HANDLE SUBMIT--------
 function handleSubmit(event: SubmitEvent): void {
   event.preventDefault();
 
   const taskName = taskInput.value.trim();
 
-  if (taskName === "") {
-    errorMessage.textContent = "Task name is required.";
+  const validationError = validateTaskName(taskName);
+
+  if (validationError !== "") {
+    errorMessage.textContent = validationError;
     return;
   }
 
@@ -71,8 +91,6 @@ function handleSubmit(event: SubmitEvent): void {
 
   taskForm.reset();
 }
-
-taskForm.addEventListener("submit", handleSubmit);
 
 //-----------------------------
 //--------ADD TASK-------------
@@ -87,34 +105,6 @@ function addTask(name: string, priority: TaskPriority): void {
   tasks.push(newTask);
   nextId++;
   renderTasks();
-}
-
-//-----------------------------
-//----SHOW SPECIFIC PRIORITY---
-//function showTasksByPriority(priority: TaskPriority): void {
-//console.log(`Tasks med prioritet: ${priority}`);
-
-//tasks.forEach((task) => {
-//if (task.priority === priority) {
-//printTask(task);
-//}
-// });
-//}
-
-//----------------------------------
-//------TOGGLE PENDING-COMPLETED----
-function toggleTaskStatus(taskName: string): void {
-  const foundTask = tasks.find((task) => task.name === taskName);
-
-  if (foundTask) {
-    if (foundTask.status === "pending") {
-      foundTask.status = "completed";
-    } else {
-      foundTask.status = "pending";
-    }
-  } else {
-    console.log("Tasken hittades inte.");
-  }
 }
 
 //----------------------------------
@@ -194,11 +184,8 @@ function renderTasks(): void {
   }
 }
 
+renderTasks();
+
 //-----------------------------
 //------------TESTS------------
 //-----------------------------
-//addTask("Lära mig TypeScript", "high");
-//addTask("Handla", "medium");
-//addTask("Diska", "low");
-
-renderTasks();

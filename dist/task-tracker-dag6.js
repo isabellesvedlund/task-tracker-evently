@@ -17,12 +17,27 @@ const priorityInput = document.querySelector("#priority-input");
 const taskForm = document.querySelector("#task-form");
 const errorMessage = document.querySelector("#error-message");
 //-----------------------------
+//--------VALIDATE TASK--------
+function validateTaskName(taskName) {
+    if (taskName === "") {
+        return "Task name is required.";
+    }
+    if (taskName.length < 3) {
+        return "Task name must be at least 3 characters.";
+    }
+    if (taskName.length > 40) {
+        return "Task name must be max 40 characters.";
+    }
+    return "";
+}
+//-----------------------------
 //--------HANDLE SUBMIT--------
 function handleSubmit(event) {
     event.preventDefault();
     const taskName = taskInput.value.trim();
-    if (taskName === "") {
-        errorMessage.textContent = "Task name is required.";
+    const validationError = validateTaskName(taskName);
+    if (validationError !== "") {
+        errorMessage.textContent = validationError;
         return;
     }
     errorMessage.textContent = "";
@@ -30,7 +45,6 @@ function handleSubmit(event) {
     addTask(taskName, priority);
     taskForm.reset();
 }
-taskForm.addEventListener("submit", handleSubmit);
 //-----------------------------
 //--------ADD TASK-------------
 function addTask(name, priority) {
@@ -43,32 +57,6 @@ function addTask(name, priority) {
     tasks.push(newTask);
     nextId++;
     renderTasks();
-}
-//-----------------------------
-//----SHOW SPECIFIC PRIORITY---
-//function showTasksByPriority(priority: TaskPriority): void {
-//console.log(`Tasks med prioritet: ${priority}`);
-//tasks.forEach((task) => {
-//if (task.priority === priority) {
-//printTask(task);
-//}
-// });
-//}
-//----------------------------------
-//------TOGGLE PENDING-COMPLETED----
-function toggleTaskStatus(taskName) {
-    const foundTask = tasks.find((task) => task.name === taskName);
-    if (foundTask) {
-        if (foundTask.status === "pending") {
-            foundTask.status = "completed";
-        }
-        else {
-            foundTask.status = "pending";
-        }
-    }
-    else {
-        console.log("Tasken hittades inte.");
-    }
 }
 //----------------------------------
 //------TOGGLE TASK BY ID-----------
@@ -134,12 +122,9 @@ function renderTasks() {
         app?.append(card);
     }
 }
+renderTasks();
+export {};
 //-----------------------------
 //------------TESTS------------
 //-----------------------------
-//addTask("Lära mig TypeScript", "high");
-//addTask("Handla", "medium");
-//addTask("Diska", "low");
-renderTasks();
-export {};
 //# sourceMappingURL=task-tracker-dag6.js.map
