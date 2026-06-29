@@ -1,0 +1,14 @@
+.task {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.high-priority {
+  border-left: 4px solid red;
+}
+
+.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}

@@ -137,6 +137,9 @@ function deleteTask(id) {
 function renderTask(task) {
     const card = document.createElement("div");
     card.classList.add("task");
+    if (task.status === "completed") {
+        card.classList.add("completed");
+    }
     if (task.priority === "high") {
         card.classList.add("high-priority");
     }
