@@ -29,6 +29,7 @@ function handleSubmit(event) {
         const priority = priorityInput.value;
         addTask(taskName, priority);
         taskForm.reset();
+        taskForm.addEventListener("submit", handleSubmit);
     }
 }
 taskForm.addEventListener("submit", handleSubmit);

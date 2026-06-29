@@ -68,6 +68,7 @@ function handleSubmit(event: SubmitEvent): void {
 
     addTask(taskName, priority);
     taskForm.reset();
+    taskForm.addEventListener("submit", handleSubmit);
   }
 }
 
