@@ -39,62 +39,15 @@ function addTask(name, priority) {
     taskInput.value = "";
 }
 //-----------------------------
-//------- PRINT TASK-----------
-function printTask(task) {
-    console.log(`Namn: ${task.name}`);
-    console.log(`Status: ${task.status}`);
-    console.log(`Prioritet: ${task.priority}`);
-    console.log("---------------");
-}
-//-----------------------------------
-//---SHOW TASKS WITH PROPERTIES------
-function showTasks() {
-    console.log("Alla tasks:");
-    tasks.forEach((task) => {
-        printTask(task);
-    });
-}
-//-----------------------------
-//--PENDING TASKS--------------
-function showPendingTasks() {
-    console.log("Pending tasks:");
-    tasks.forEach((task) => {
-        if (task.status === "pending") {
-            printTask(task);
-        }
-    });
-}
-//-----------------------------
-//----COMPLETED TASKS----------
-function showCompletedTasks() {
-    console.log("Completed tasks:");
-    tasks.forEach((task) => {
-        if (task.status === "completed") {
-            printTask(task);
-        }
-    });
-}
-//-----------------------------
 //----SHOW SPECIFIC PRIORITY---
-function showTasksByPriority(priority) {
-    console.log(`Tasks med prioritet: ${priority}`);
-    tasks.forEach((task) => {
-        if (task.priority === priority) {
-            printTask(task);
-        }
-    });
-}
-//-----------------------------
-//----MARK COMPLETED-----------
-function completeTask(taskName) {
-    const foundTask = tasks.find((task) => task.name === taskName);
-    if (foundTask) {
-        foundTask.status = "completed";
-    }
-    else {
-        console.log("Tasken hittades inte.");
-    }
-}
+//function showTasksByPriority(priority: TaskPriority): void {
+//console.log(`Tasks med prioritet: ${priority}`);
+//tasks.forEach((task) => {
+//if (task.priority === priority) {
+//printTask(task);
+//}
+// });
+//}
 //----------------------------------
 //------TOGGLE PENDING-COMPLETED----
 function toggleTaskStatus(taskName) {
@@ -178,11 +131,9 @@ function renderTasks() {
 //-----------------------------
 //------------TESTS------------
 //-----------------------------
-addTask("Lära mig TypeScript", "high");
-addTask("Handla", "medium");
-addTask("Diska", "low");
-completeTask("Handla");
-toggleTaskStatus("Handla");
+//addTask("Lära mig TypeScript", "high");
+//addTask("Handla", "medium");
+//addTask("Diska", "low");
 renderTasks();
 export {};
 //# sourceMappingURL=task-tracker-dag6.js.map
