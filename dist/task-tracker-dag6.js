@@ -111,6 +111,21 @@ function toggleTaskStatus(taskName) {
         console.log("Tasken hittades inte.");
     }
 }
+//----------------------------------
+//------TOGGLE TASK BY ID-----------
+function toggleTask(id) {
+    for (const task of tasks) {
+        if (task.id === id) {
+            if (task.status === "pending") {
+                task.status = "completed";
+            }
+            else {
+                task.status = "pending";
+            }
+        }
+    }
+    renderTasks();
+}
 //-----------------------------
 //---RENDER ONE TASK CARD------
 function renderTask(task) {
@@ -127,7 +142,10 @@ function renderTask(task) {
     priority.textContent = `Prioritet: ${task.priority}`;
     const completeButton = document.createElement("button");
     completeButton.classList.add("btn");
-    completeButton.textContent = "Complete";
+    completeButton.textContent = task.status === "pending" ? "Complete" : "Undo";
+    completeButton.addEventListener("click", () => {
+        toggleTask(task.id);
+    });
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("btn");
     deleteButton.textContent = "Delete";
