@@ -16,7 +16,12 @@ const priorityInput = document.querySelector("#priority-input");
 const addButton = document.querySelector("#add-button");
 addButton.addEventListener("click", () => {
     const taskName = taskInput.value.trim();
-    console.log(taskName);
+    if (taskName === "") {
+        console.log("Task name is required.");
+        return;
+    }
+    const priority = priorityInput.value;
+    addTask(taskName, priority);
 });
 //-----------------------------
 //--------ADD TASK-------------
@@ -27,6 +32,8 @@ function addTask(name, priority) {
         priority: priority,
     };
     tasks.push(newTask);
+    renderTasks();
+    taskInput.value = "";
 }
 //-----------------------------
 //------- PRINT TASK-----------

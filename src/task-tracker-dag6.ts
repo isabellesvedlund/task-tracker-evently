@@ -48,7 +48,13 @@ const addButton = document.querySelector("#add-button") as HTMLButtonElement;
 addButton.addEventListener("click", () => {
   const taskName = taskInput.value.trim();
 
-  console.log(taskName);
+  if (taskName === "") {
+    console.log("Task name is required.");
+    return;
+  }
+  const priority = priorityInput.value as TaskPriority;
+
+  addTask(taskName, priority);
 });
 
 //-----------------------------
@@ -61,6 +67,8 @@ function addTask(name: string, priority: TaskPriority): void {
   };
 
   tasks.push(newTask);
+  renderTasks();
+  taskInput.value = "";
 }
 
 //-----------------------------
