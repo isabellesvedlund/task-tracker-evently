@@ -40,7 +40,9 @@ title.textContent = "Mina Tasks";
 const app = document.querySelector("#app");
 
 const taskInput = document.querySelector("#task-input") as HTMLInputElement;
-
+const descriptionInput = document.querySelector(
+  "#description-input",
+) as HTMLTextAreaElement;
 const priorityInput = document.querySelector(
   "#priority-input",
 ) as HTMLSelectElement;
@@ -91,16 +93,25 @@ function handleSubmit(event: SubmitEvent): void {
 
   taskForm.reset();
 }
+taskForm.addEventListener("submit", handleSubmit);
 
 //-----------------------------
 //--------ADD TASK-------------
-function addTask(name: string, priority: TaskPriority): void {
+function addTask(
+  name: string,
+  priority: TaskPriority,
+  description?: string,
+): void {
   const newTask: Task = {
     id: nextId,
     name: name,
     status: "pending",
     priority: priority,
   };
+
+  if (description) {
+    newTask.description = description;
+  }
 
   tasks.push(newTask);
   nextId++;
