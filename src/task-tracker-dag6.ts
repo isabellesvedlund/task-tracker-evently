@@ -46,7 +46,9 @@ const priorityInput = document.querySelector(
 const addButton = document.querySelector("#add-button") as HTMLButtonElement;
 
 addButton.addEventListener("click", () => {
-  console.log(taskInput.value);
+  const taskName = taskInput.value.trim();
+
+  console.log(taskName);
 });
 
 //-----------------------------

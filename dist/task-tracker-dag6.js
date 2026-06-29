@@ -15,7 +15,8 @@ const taskInput = document.querySelector("#task-input");
 const priorityInput = document.querySelector("#priority-input");
 const addButton = document.querySelector("#add-button");
 addButton.addEventListener("click", () => {
-    console.log(taskInput.value);
+    const taskName = taskInput.value.trim();
+    console.log(taskName);
 });
 //-----------------------------
 //--------ADD TASK-------------
