@@ -37,6 +37,14 @@ title.textContent = "Mina Tasks";
 
 const app = document.querySelector("#app");
 
+const taskInput = document.querySelector("#task-input") as HTMLInputElement;
+
+const priorityInput = document.querySelector(
+  "#priority-input",
+) as HTMLSelectElement;
+
+const addButton = document.querySelector("#add-button") as HTMLButtonElement;
+
 //-----------------------------
 //--------ADD TASK-------------
 function addTask(name: string, priority: TaskPriority): void {

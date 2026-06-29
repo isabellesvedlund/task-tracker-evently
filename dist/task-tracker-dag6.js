@@ -11,6 +11,9 @@ const tasks = [];
 const title = document.querySelector("#title");
 title.textContent = "Mina Tasks";
 const app = document.querySelector("#app");
+const taskInput = document.querySelector("#task-input");
+const priorityInput = document.querySelector("#priority-input");
+const addButton = document.querySelector("#add-button");
 //-----------------------------
 //--------ADD TASK-------------
 function addTask(name, priority) {
