@@ -18,7 +18,18 @@ const taskForm = document.querySelector("#task-form");
 const errorMessage = document.querySelector("#error-message");
 function handleSubmit(event) {
     event.preventDefault();
-    console.log("Formuläret skickades.");
+    function handleSubmit(event) {
+        event.preventDefault();
+        const taskName = taskInput.value.trim();
+        if (taskName === "") {
+            errorMessage.textContent = "Task name is required.";
+            return;
+        }
+        errorMessage.textContent = "";
+        const priority = priorityInput.value;
+        addTask(taskName, priority);
+        taskForm.reset();
+    }
 }
 taskForm.addEventListener("submit", handleSubmit);
 //-----------------------------
@@ -33,7 +44,6 @@ function addTask(name, priority) {
     tasks.push(newTask);
     nextId++;
     renderTasks();
-    taskInput.value = "";
 }
 //-----------------------------
 //----SHOW SPECIFIC PRIORITY---

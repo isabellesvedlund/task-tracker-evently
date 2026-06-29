@@ -54,7 +54,21 @@ const errorMessage = document.querySelector(
 function handleSubmit(event: SubmitEvent): void {
   event.preventDefault();
 
-  console.log("Formuläret skickades.");
+  function handleSubmit(event: SubmitEvent): void {
+    event.preventDefault();
+
+    const taskName = taskInput.value.trim();
+
+    if (taskName === "") {
+      errorMessage.textContent = "Task name is required.";
+      return;
+    }
+    errorMessage.textContent = "";
+    const priority = priorityInput.value as TaskPriority;
+
+    addTask(taskName, priority);
+    taskForm.reset();
+  }
 }
 
 taskForm.addEventListener("submit", handleSubmit);
@@ -72,7 +86,6 @@ function addTask(name: string, priority: TaskPriority): void {
   tasks.push(newTask);
   nextId++;
   renderTasks();
-  taskInput.value = "";
 }
 
 //-----------------------------
