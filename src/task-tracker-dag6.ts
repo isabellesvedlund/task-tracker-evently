@@ -1,30 +1,4 @@
-// // Visa rubrik
-// function showHeader(): void {
-//   console.log(`
-// ==================================
-
-//           Task Tracker
-
-// ==================================
-// `);
-// }
-
-//----------------------------------
-//---------- DEFINIERAR TYPER-------
-//----------------------------------
-
-type TaskStatus = "pending" | "completed";
-
-type TaskPriority = "low" | "medium" | "high";
-
-type Task = {
-  id: number;
-  name: string;
-  status: TaskStatus;
-  priority: TaskPriority;
-  description?: string;
-  notes?: string;
-};
+import type { Task, TaskPriority } from "./types.js";
 
 //---------------------------------
 //--------ARRAY MED OBJEKT TASK----
