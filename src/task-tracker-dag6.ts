@@ -128,7 +128,40 @@ function addTask(
 
   tasks.push(newTask);
   nextId++;
+  saveTasks();
   renderTasks();
+}
+
+//-----------------------------
+//--------SAVE TASKS-----------
+function saveTasks(): void {
+  const json = JSON.stringify(tasks);
+  localStorage.setItem("tasks", json);
+  saveLastUpdated();
+}
+
+//-----------------------------
+//-----SAVE LAST UPDATED-------
+function saveLastUpdated(): void {
+  const now = new Date().toLocaleString("sv-SE");
+  localStorage.setItem("lastUpdated", now);
+}
+
+//-----------------------------
+//--------LOAD TASKS------------
+function loadTasks(): void {
+  const json = localStorage.getItem("tasks");
+
+  if (json === null) {
+    return;
+  }
+
+  const loadedTasks = JSON.parse(json) as Task[];
+  tasks = loadedTasks;
+
+  if (tasks.length > 0) {
+    nextId = Math.max(...tasks.map((task) => task.id)) + 1;
+  }
 }
 
 //----------------------------------
@@ -143,7 +176,7 @@ function toggleTask(id: number): void {
       }
     }
   }
-
+  saveTasks();
   renderTasks();
 }
 
@@ -151,7 +184,7 @@ function toggleTask(id: number): void {
 //------DELETE TASK BY ID-----------
 function deleteTask(id: number): void {
   tasks = tasks.filter((task) => task.id !== id);
-
+  saveTasks();
   renderTasks();
 }
 
@@ -212,6 +245,18 @@ function renderTasks(): void {
     app.innerHTML = "";
   }
 
+  if (tasks.length === 0) {
+    app!.textContent = "Inga tasks ännu.";
+    return;
+  }
+  const lastUpdated = localStorage.getItem("lastUpdated");
+
+  if (lastUpdated !== null) {
+    const updatedText = document.createElement("p");
+    updatedText.textContent = `Senast uppdaterad: ${lastUpdated}`;
+    app?.append(updatedText);
+  }
+
   for (const task of tasks) {
     const card = renderTask(task);
 
@@ -219,6 +264,7 @@ function renderTasks(): void {
   }
 }
 
+loadTasks();
 renderTasks();
 
 //-----------------------------
