@@ -196,9 +196,16 @@ function renderTask(task: Task): HTMLDivElement {
   if (task.status === "completed") {
     card.classList.add("completed");
   }
-
   if (task.priority === "high") {
     card.classList.add("high-priority");
+  }
+
+  if (task.priority === "medium") {
+    card.classList.add("medium-priority");
+  }
+
+  if (task.priority === "low") {
+    card.classList.add("low-priority");
   }
 
   const title = document.createElement("h3");

@@ -145,3 +145,15 @@ button:hover {
 
   font-size: 0.9rem;
 }
+
+.high-priority {
+  border-left: 8px solid #e53935;
+}
+
+.medium-priority {
+  border-left: 8px solid #ff9800;
+}
+
+.low-priority {
+  border-left: 8px solid #4caf50;
+}

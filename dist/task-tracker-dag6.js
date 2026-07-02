@@ -134,6 +134,12 @@ function renderTask(task) {
     if (task.priority === "high") {
         card.classList.add("high-priority");
     }
+    if (task.priority === "medium") {
+        card.classList.add("medium-priority");
+    }
+    if (task.priority === "low") {
+        card.classList.add("low-priority");
+    }
     const title = document.createElement("h3");
     title.textContent = task.name;
     const status = document.createElement("p");
